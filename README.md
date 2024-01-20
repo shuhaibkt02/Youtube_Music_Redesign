@@ -13,3 +13,11 @@ Welcome to the YouTube Music Redesign project! This initiative aims to enhance t
 - **Intuitive Navigation:** Effortlessly explore content with a redesigned navigation system, making it easier to find your favorite shows and movies.
 - **Personalized Recommendations:** Get tailored content recommendations based on your viewing history and preferences.
 - **Responsive Layout:** Experience the redesign seamlessly across various devices, ensuring a consistent and enjoyable user journey.
+
+
+## Screenshots
+![onBoard (1)](https://github.com/shuhaibkt02/Youtube_Music_Redesign/assets/111732518/91db60b2-7a91-45a2-b053-d68ba699a489) ![onBoard_3 (1)](https://github.com/shuhaibkt02/Youtube_Music_Redesign/assets/111732518/a362d9ba-976f-420e-9c1a-357e721ffc72)
+
+
+
+
