@@ -30,7 +30,7 @@ class PageViewContainer extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 15, top: 30),
                 alignment: Alignment.topRight,
                 child: isLast
-                    ? const SizedBox(height: 20)
+                    ? const SizedBox(height: 16)
                     : InkWell(
                         onTap: onSkip,
                         child: Text(
