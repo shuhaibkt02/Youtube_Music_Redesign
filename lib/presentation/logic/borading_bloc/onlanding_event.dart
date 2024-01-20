@@ -8,4 +8,4 @@ sealed class OnBoardingEvent extends Equatable {
 }
 
 
-final class ChangelandingPage extends OnBoardingEvent{}
+final class CheckBoardingPage extends OnBoardingEvent{}
