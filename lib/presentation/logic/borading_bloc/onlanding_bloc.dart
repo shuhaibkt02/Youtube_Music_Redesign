@@ -6,7 +6,13 @@ part 'onlanding_state.dart';
 
 class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
   OnBoardingBloc() : super(InitialOnBoarding()) {
-    on<OnBoardingEvent>((event, emit) {
+    on<CheckBoardingPage>((event, emit) {
+      emit(LoadingState());
+      try {
+        emit(OnboardingPageSelected(selectedIndex: event.selectedIndex));
+      } catch (e) {
+        emit(ErrorStateOnBoarding(errorMessage: '$e'));
+      }
     });
   }
 }

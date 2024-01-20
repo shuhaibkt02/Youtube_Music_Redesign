@@ -5,11 +5,15 @@ import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
-    required this.isLast,
+    this.isLast,
     required this.onpress,
+    this.child,
+    this.backgroundColor,
   });
   final VoidCallback onpress;
-  final bool isLast;
+  final bool? isLast;
+  final Widget? child;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +23,15 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onpress,
         style: ElevatedButton.styleFrom(
-          backgroundColor: isLast ? appColorRed : appColorWhite,
+          backgroundColor: (isLast == true) ? appColorRed : appColorWhite,
           fixedSize: Size(CustomSize(context).width, 50),
         ),
-        child: Text(isLast ? 'Get started' : 'Next',
-            style: CustomTextTheme(context).bodySmall?.copyWith(
-                color: isLast ? Colors.grey.shade300 : appColorBlack)),
+        child: child ??
+            Text((isLast == true) ? 'Get started' : 'Next',
+                style: CustomTextTheme(context).bodySmall?.copyWith(
+                    color: (isLast == true)
+                        ? Colors.grey.shade300
+                        : appColorBlack)),
       ),
     );
   }

@@ -7,5 +7,8 @@ sealed class OnBoardingEvent extends Equatable {
   List<Object> get props => [];
 }
 
+final class CheckBoardingPage extends OnBoardingEvent {
+  final int selectedIndex;
 
-final class CheckBoardingPage extends OnBoardingEvent{}
+  const CheckBoardingPage({required this.selectedIndex});
+}
