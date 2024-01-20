@@ -35,7 +35,7 @@ class PageViewContainer extends StatelessWidget {
                         onTap: onSkip,
                         child: Text(
                           'Skip',
-                          style: TextStyle(color: Colors.grey.shade400),
+                          style: CustomTextTheme(context).bodySmall,
                         ),
                       ),
               ),
