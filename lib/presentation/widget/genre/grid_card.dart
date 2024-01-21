@@ -18,6 +18,7 @@ class GridCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = CustomSize(context).width;
     return Container(
       margin: const EdgeInsets.only(left: 3),
       decoration: BoxDecoration(
@@ -30,9 +31,14 @@ class GridCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: 30,
+            radius: (width > 570)
+                ? width / 16
+                : (width > 549)
+                    ? width / 14
+                    : width / 11,
             backgroundColor:
                 isActive ? selectedCircleColor : const Color(0xFF323232),
+            backgroundImage: AssetImage(iconImg ?? 'assets/images/google.png'),
           ),
           const SizedBox(height: 5),
           Text(

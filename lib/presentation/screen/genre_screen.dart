@@ -1,6 +1,7 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/grid_card.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/title_skip.dart';
 import 'package:youtube_music_redesign/presentation/widget/landing%20page/custom_button.dart';
@@ -104,7 +105,9 @@ class GenreScreen extends StatelessWidget {
               ),
             ),
             CustomButton(
-              onpress: () {},
+              onpress: () {
+                GoRouter.of(context).pushNamed('artistPage');
+              },
               height: 60,
               backgroundColor: appColorRed,
               buttonLabel: 'Next',
