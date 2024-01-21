@@ -59,8 +59,7 @@ class OnboardingPageView extends StatelessWidget {
                   ? width / 4.2
                   : width / 3.2,
           left: 25,
-          child: Container(
-            // color: Colors.teal,
+          child: SizedBox(
             width: CustomSize(context).width,
             child: Text(_captionList[selectedIndex],
                 textAlign: TextAlign.start,
@@ -68,6 +67,10 @@ class OnboardingPageView extends StatelessWidget {
           ),
         ),
         CustomButton(
+          backgroundColor: (isLastPage == true) ? appColorRed : appColorWhite,
+          buttonLabel: (isLastPage == true) ? 'Get started' : 'Next',
+          labelColor:
+              (isLastPage == true) ? Colors.grey.shade300 : appColorBlack,
           isLast: isLastPage,
           onpress: () async {
             isLastPage

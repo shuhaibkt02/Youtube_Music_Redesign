@@ -8,14 +8,18 @@ extension CustomSize on BuildContext {
 }
 
 extension CustomTextTheme on BuildContext {
-  TextTheme get _themeData => Theme.of(this).textTheme;
+  ThemeData get _themeData => Theme.of(this);
+  TextTheme get _textTheme => Theme.of(this).textTheme;
+// themedata
+  TextTheme get themeData => _themeData.textTheme;
+
   //title
-    TextStyle? get titleLarge => _themeData.titleLarge;
-    TextStyle? get titleMedium => _themeData.titleMedium;
-    TextStyle? get titleSmall => _themeData.titleSmall;
+  TextStyle? get titleLarge => _textTheme.titleLarge;
+  TextStyle? get titleMedium => _textTheme.titleMedium;
+  TextStyle? get titleSmall => _textTheme.titleSmall;
 
   //body
-  TextStyle? get bodyLarge => _themeData.bodyLarge;
-  TextStyle? get bodyMedium => _themeData.bodyMedium;
-  TextStyle? get bodySmall => _themeData.bodySmall;
+  TextStyle? get bodyLarge => _textTheme.bodyLarge;
+  TextStyle? get bodyMedium => _textTheme.bodyMedium;
+  TextStyle? get bodySmall => _textTheme.bodySmall;
 }

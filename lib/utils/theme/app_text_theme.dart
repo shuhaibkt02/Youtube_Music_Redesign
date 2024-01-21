@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 ThemeData themeData = ThemeData(
-  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+  colorScheme: ColorScheme.fromSeed(seedColor: appColorBlack),
+  scaffoldBackgroundColor: appColorBlack,
   useMaterial3: true,
   textTheme: TextTheme(
     titleLarge: titleLarge,
@@ -30,7 +31,7 @@ TextStyle bodySmall = const TextStyle(
   fontSize: 12,
   fontFamily: 'Gilroy',
   color: appColorWhite,
-  fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.w500,
 );
 
 const appColorWhite = Color(0xffffffff);
