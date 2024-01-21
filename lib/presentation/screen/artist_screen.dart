@@ -96,7 +96,7 @@ class ArtistScreen extends StatelessWidget {
                                   return GridCard(
                                     onTap: () {
                                       context.read<GenreArtistBloc>().add(
-                                          UpdateGenreEvent(
+                                          UpdateArtistEvent(
                                               isActive: artist.isActive,
                                               selectedIndex: index));
                                       artist.isActive = artist.isActive;
@@ -114,7 +114,7 @@ class ArtistScreen extends StatelessWidget {
                                   return GridCard(
                                     onTap: () {
                                       context.read<GenreArtistBloc>().add(
-                                          UpdateGenreEvent(
+                                          UpdateArtistEvent(
                                               isActive: artist.isActive,
                                               selectedIndex: index));
                                       artist.isActive = state.isActive;

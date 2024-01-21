@@ -17,7 +17,7 @@ class GenreArtistBloc extends Bloc<GenreArtistEvent, GenreArtistState> {
         emit(ErrorGenreArtist(errorMessage: '$e'));
       }
     });
-    on<UpdateGenreEvent>((event, emit) {
+    on<UpdateArtistEvent>((event, emit) {
       emit(LoadingGenreArtist());
       try {
         bool isActive = event.isActive;

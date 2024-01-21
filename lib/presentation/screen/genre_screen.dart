@@ -13,10 +13,12 @@ import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 class GenreModel {
   final String label;
   bool isActive;
+  final String iconImg;
   final Color selectedColor;
   final Color selectedInsideColor;
 
   GenreModel({
+    required this.iconImg,
     required this.label,
     required this.isActive,
     required this.selectedColor,
@@ -34,24 +36,28 @@ class GenreScreen extends StatelessWidget {
         isActive: false,
         selectedColor: Colors.teal,
         selectedInsideColor: Colors.teal.shade200,
+        iconImg: 'assets/images/google.png',
       ),
       GenreModel(
         label: 'Rock',
         isActive: false,
         selectedColor: Colors.amber,
         selectedInsideColor: Colors.amber.shade200,
+        iconImg: 'assets/images/google.png',
       ),
       GenreModel(
         label: 'HipHop',
         isActive: true,
         selectedColor: Colors.red,
         selectedInsideColor: Colors.red.shade200,
+        iconImg: 'assets/images/google.png',
       ),
       GenreModel(
         label: 'Trap',
         isActive: false,
         selectedColor: Colors.green,
         selectedInsideColor: Colors.green.shade200,
+        iconImg: 'assets/images/google.png',
       ),
     ];
 
@@ -108,6 +114,7 @@ class GenreScreen extends StatelessWidget {
                                     },
                                     isActive: genre.isActive,
                                     label: genre.label,
+                                    iconImg: genre.iconImg,
                                     selectedColor: genre.selectedColor,
                                     selectedCircleColor:
                                         genre.selectedInsideColor,
@@ -127,6 +134,7 @@ class GenreScreen extends StatelessWidget {
                                               selectedIndex: index));
                                       genre.isActive = state.isActive;
                                     },
+                                    iconImg: genre.iconImg,
                                     isActive: genre.isActive,
                                     label: genre.label,
                                     selectedColor: genre.selectedColor,

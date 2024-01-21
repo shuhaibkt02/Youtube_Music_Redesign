@@ -17,4 +17,9 @@ final class UpdateGenreEvent extends GenreArtistEvent {
   });
 }
 
-final class UpdateArtistEvent extends GenreArtistEvent {}
+final class UpdateArtistEvent extends GenreArtistEvent {
+  final bool isActive;
+  final int selectedIndex;
+
+  const UpdateArtistEvent({required this.isActive, required this.selectedIndex});
+}
