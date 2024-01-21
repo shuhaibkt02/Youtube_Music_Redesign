@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:youtube_music_redesign/presentation/logic/genre%20artist/genre_artist_bloc.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/grid_card.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/title_skip.dart';
 import 'package:youtube_music_redesign/presentation/widget/landing%20page/custom_button.dart';
@@ -7,7 +9,7 @@ import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
 class ArtistModel {
   final String label;
-  final bool isActive;
+  bool isActive;
   final String imgScr;
 
   ArtistModel({
@@ -86,11 +88,45 @@ class ArtistScreen extends StatelessWidget {
                         ),
                         itemCount: _artistModelList.length,
                         itemBuilder: (context, index) {
-                          final genre = _artistModelList[index];
-                          return GridCard(
-                            isActive: genre.isActive,
-                            label: genre.label,
-                            iconImg: genre.imgScr,
+                          final artist = _artistModelList[index];
+                          return BlocBuilder<GenreArtistBloc, GenreArtistState>(
+                            builder: (context, state) {
+                              switch (state) {
+                                case GenreArtistInitial():
+                                  return GridCard(
+                                    onTap: () {
+                                      context.read<GenreArtistBloc>().add(
+                                          UpdateGenreEvent(
+                                              isActive: artist.isActive,
+                                              selectedIndex: index));
+                                      artist.isActive = artist.isActive;
+                                    },
+                                    isActive: artist.isActive,
+                                    label: artist.label,
+                                    iconImg: artist.imgScr,
+                                  );
+                                case LoadingGenreArtist():
+                                  return const SizedBox();
+                                case UpdatedGenreArtist():
+                                  int activeIndex = state.selectedIndex;
+                                  _artistModelList[activeIndex].isActive =
+                                      state.isActive;
+                                  return GridCard(
+                                    onTap: () {
+                                      context.read<GenreArtistBloc>().add(
+                                          UpdateGenreEvent(
+                                              isActive: artist.isActive,
+                                              selectedIndex: index));
+                                      artist.isActive = state.isActive;
+                                    },
+                                    isActive: artist.isActive,
+                                    label: artist.label,
+                                    iconImg: artist.imgScr,
+                                  );
+                                case ErrorGenreArtist():
+                                  return const SizedBox();
+                              }
+                            },
                           );
                         },
                       ),

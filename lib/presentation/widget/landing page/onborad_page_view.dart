@@ -111,7 +111,7 @@ class OnboardingPageView extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                GoRouter.of(context).pushNamed('genrePage');
+                GoRouter.of(context).pushReplacementNamed('genrePage');
               },
               child: Container(
                 margin: const EdgeInsets.all(8),

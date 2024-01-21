@@ -1,7 +1,9 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:youtube_music_redesign/presentation/logic/genre%20artist/genre_artist_bloc.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/grid_card.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/title_skip.dart';
 import 'package:youtube_music_redesign/presentation/widget/landing%20page/custom_button.dart';
@@ -10,7 +12,7 @@ import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
 class GenreModel {
   final String label;
-  final bool isActive;
+  bool isActive;
   final Color selectedColor;
   final Color selectedInsideColor;
 
@@ -29,7 +31,7 @@ class GenreScreen extends StatelessWidget {
     List<GenreModel> _genreModelList = [
       GenreModel(
         label: 'House',
-        isActive: true,
+        isActive: false,
         selectedColor: Colors.teal,
         selectedInsideColor: Colors.teal.shade200,
       ),
@@ -47,7 +49,7 @@ class GenreScreen extends StatelessWidget {
       ),
       GenreModel(
         label: 'Trap',
-        isActive: true,
+        isActive: false,
         selectedColor: Colors.green,
         selectedInsideColor: Colors.green.shade200,
       ),
@@ -90,12 +92,51 @@ class GenreScreen extends StatelessWidget {
                         ),
                         itemCount: _genreModelList.length,
                         itemBuilder: (context, index) {
-                          final genre = _genreModelList[index];
-                          return GridCard(
-                            isActive: genre.isActive,
-                            label: genre.label,
-                            selectedColor: genre.selectedColor,
-                            selectedCircleColor: genre.selectedInsideColor,
+                          GenreModel genre = _genreModelList[index];
+
+                          return BlocBuilder<GenreArtistBloc, GenreArtistState>(
+                            builder: (context, state) {
+                              switch (state) {
+                                case GenreArtistInitial():
+                                  return GridCard(
+                                    onTap: () {
+                                      context.read<GenreArtistBloc>().add(
+                                          UpdateGenreEvent(
+                                              isActive: genre.isActive,
+                                              selectedIndex: index));
+                                      genre.isActive = !genre.isActive;
+                                    },
+                                    isActive: genre.isActive,
+                                    label: genre.label,
+                                    selectedColor: genre.selectedColor,
+                                    selectedCircleColor:
+                                        genre.selectedInsideColor,
+                                  );
+                                case LoadingGenreArtist():
+                                  return const SizedBox();
+                                case UpdatedGenreArtist():
+                                  int activeIndex = state.selectedIndex;
+                                  _genreModelList[activeIndex].isActive =
+                                      state.isActive;
+
+                                  return GridCard(
+                                    onTap: () {
+                                      context.read<GenreArtistBloc>().add(
+                                          UpdateGenreEvent(
+                                              isActive: genre.isActive,
+                                              selectedIndex: index));
+                                      genre.isActive = state.isActive;
+                                    },
+                                    isActive: genre.isActive,
+                                    label: genre.label,
+                                    selectedColor: genre.selectedColor,
+                                    selectedCircleColor:
+                                        genre.selectedInsideColor,
+                                  );
+                                case ErrorGenreArtist():
+                                  return const SizedBox();
+                              }
+                            },
                           );
                         },
                       ),

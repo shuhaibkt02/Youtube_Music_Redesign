@@ -7,6 +7,7 @@ class GridCard extends StatelessWidget {
   final String? iconImg;
   final Color? selectedColor;
   final Color? selectedCircleColor;
+  final VoidCallback? onTap;
   const GridCard({
     super.key,
     required this.isActive,
@@ -14,38 +15,43 @@ class GridCard extends StatelessWidget {
     this.iconImg,
     this.selectedColor,
     this.selectedCircleColor,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final width = CustomSize(context).width;
-    return Container(
-      margin: const EdgeInsets.only(left: 3),
-      decoration: BoxDecoration(
-        color: isActive
-            ? selectedColor ?? Colors.red.shade400
-            : const Color(0xFF272727),
-        borderRadius: BorderRadius.circular(28),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircleAvatar(
-            radius: (width > 570)
-                ? width / 16
-                : (width > 549)
-                    ? width / 14
-                    : width / 11,
-            backgroundColor:
-                isActive ? selectedCircleColor : const Color(0xFF323232),
-            backgroundImage: AssetImage(iconImg ?? 'assets/images/google.png'),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            label ?? 'Art',
-            style: CustomTextTheme(context).bodySmall,
-          )
-        ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(left: 3),
+        decoration: BoxDecoration(
+          color: isActive
+              ? selectedColor ?? Colors.red.shade400
+              : const Color(0xFF272727),
+          borderRadius: BorderRadius.circular(28),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              radius: (width > 570)
+                  ? width / 16
+                  : (width > 549)
+                      ? width / 14
+                      : width / 11,
+              backgroundColor:
+                  isActive ? selectedCircleColor : const Color(0xFF323232),
+              backgroundImage:
+                  AssetImage(iconImg ?? 'assets/images/google.png'),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              label ?? 'Art',
+              style: CustomTextTheme(context).bodySmall,
+            )
+          ],
+        ),
       ),
     );
   }

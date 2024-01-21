@@ -6,7 +6,7 @@ import 'package:youtube_music_redesign/presentation/screen/on_boarding_page.dart
 
 class AppRouterConfig {
   static GoRouter goRouter = GoRouter(
-    initialLocation: '/OnBoarding',
+    initialLocation: '/genrePage',
     routes: [
       GoRoute(
         path: '/OnBoarding',
@@ -18,10 +18,11 @@ class AppRouterConfig {
       GoRoute(
         path: '/genrePage',
         name: 'genrePage',
-       pageBuilder: (context, state) => customTransitionPage<void>(
-          child: const GenreScreen(),
-          context: context,
-        ),
+        builder: (context, state) => const GenreScreen(),
+        //  pageBuilder: (context, state) => customTransitionPage<void>(
+        //     child: const GenreScreen(),
+        //     context: context,
+        //   ),
       ),
       GoRoute(
         path: '/artistPage',
