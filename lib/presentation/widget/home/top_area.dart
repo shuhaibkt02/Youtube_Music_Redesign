@@ -5,12 +5,13 @@ import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
 import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
 class TopArea extends StatelessWidget {
+  final TextTheme textTheme;
+  final String imgSrc;
   const TopArea({
     super.key,
     required this.textTheme,
+    required this.imgSrc,
   });
-
-  final TextTheme textTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,8 @@ class TopArea extends StatelessWidget {
 
     return Stack(
       children: [
-        Image.asset(
-          'assets/images/bgm.png',
+        Image.network(
+          imgSrc,
           colorBlendMode: BlendMode.hue,
           fit: BoxFit.fill,
         ),

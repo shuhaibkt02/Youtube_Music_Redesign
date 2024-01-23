@@ -23,4 +23,15 @@ class SongModel {
         audioUrl: json['apple_music_player_url'] ?? '',
         id: json['annotation_count'] ?? 0,
       );
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'musicName': musicName,
+      'releaseDate': releaseDate,
+      'artistName': artistName,
+      'imgUrl': imgUrl,
+      'audioUrl': audioUrl,
+    };
+  }
 }

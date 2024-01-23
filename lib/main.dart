@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:youtube_music_redesign/data/local/data_service.dart';
 import 'package:youtube_music_redesign/presentation/logic/borading_bloc/onlanding_bloc.dart';
 import 'package:youtube_music_redesign/presentation/logic/genre%20artist/genre_artist_bloc.dart';
 import 'package:youtube_music_redesign/utils/router/router_config.dart';
 import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SqliteService().initDB();
   runApp(const MyApp());
 }
 

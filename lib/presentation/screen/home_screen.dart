@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/spotify.dart';
-import 'package:youtube_music_redesign/data/remote/api/api_calling.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import 'package:youtube_music_redesign/data/local/data_service.dart';
 import 'package:youtube_music_redesign/data/remote/model/song_model.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/cutom_navbar.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/mini_player.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/music_listview.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/top_area.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
+import 'secret.dart';
 
 List<SongModel> loadedList = [];
 
@@ -18,37 +20,76 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late SongModel data;
+  late SongModel musicData;
   bool isPlaying = false;
+  List<SongModel> dbMusicList = [];
+  String backImg =
+      'https://i.scdn.co/image/ab67616d0000b273af634982d9b15de3c77f7dd9';
 
   @override
   void initState() {
-    getData();
+    initializeData();
     super.initState();
   }
 
-  getSpotify() async {
-    const apiKey = String.fromEnvironment('CLIENT_SECRET');
-
-    // final credentials = SpotifyApiCredentials(clientId, clientSecret);
-    // final spotify = SpotifyApi(credentials);
-    // final artist = await spotify.artists.get('0OdUWJ0sBjDrqHygGUXeCF');
-    // print(artist);
-
-    print(apiKey.runtimeType);
-  }
-
-  getData() async {
-    final dio = ApiCall().dio;
-    final response = await dio.get('/songs/1772342');
-    data = SongModel.fromJson(response.data['response']['song']);
-    if (!loadedList.any((element) => element.musicName == data.musicName)) {
-      loadedList.add(data);
-    }
-
+  Future<void> initializeData() async {
+    await getSpotify(trackId: '4VnDmjYCZkyeqeb0NIKqdA');
+    await initializeDatabase();
+    _refreshNotes();
     setState(() {
       isPlaying = true;
     });
+  }
+
+  Future<void> initializeDatabase() async {
+    await SqliteService().initDB();
+  }
+
+  void _refreshNotes() async {
+    final data = await SqliteService().getMusic();
+    setState(() {
+      dbMusicList = data;
+    });
+  }
+
+  getSpotify({required String trackId}) async {
+    final yt = YoutubeExplode();
+    const clientId = SercetClassHere.clientId;
+    const clientSecret = SercetClassHere.clientSerc;
+    final credentials = SpotifyApiCredentials(clientId, clientSecret);
+    final spotify = SpotifyApi(credentials);
+    final responseData = await spotify.tracks.get(trackId);
+
+    String? img = responseData.album!.images?[0].url;
+
+    final result = await yt.search('${responseData.name}');
+    final videoId = result.first.id.value;
+    final manifest = await yt.videos.streamsClient.getManifest(videoId);
+    final audioUrl = manifest.audioOnly.first.url;
+
+    musicData = SongModel(
+      id: 12,
+      musicName: '${responseData.name}',
+      releaseDate: '4',
+      artistName: '${responseData.artists![0].name}',
+      imgUrl: '$img',
+      audioUrl: '$audioUrl',
+    );
+
+    checkAndAddMusic(loadedList, musicData, loadedList.add);
+    checkAndAddMusic(dbMusicList, musicData, SqliteService().addMusic);
+
+    setState(() {
+      backImg = img!;
+      isPlaying = true;
+    });
+  }
+
+  void checkAndAddMusic(
+      List<SongModel> dataList, SongModel musicData, Function addFunction) {
+    if (!dataList.any((element) => element.musicName == musicData.musicName)) {
+      addFunction(musicData);
+    }
   }
 
   @override
@@ -61,7 +102,10 @@ class _HomeScreenState extends State<HomeScreen> {
           SingleChildScrollView(
             child: Column(
               children: [
-                TopArea(textTheme: textTheme),
+                TopArea(
+                  textTheme: textTheme,
+                  imgSrc: backImg,
+                ),
                 MusicCard(
                   width: width,
                   textTheme: textTheme,
@@ -80,9 +124,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     setState(() {
                       isPlaying = false;
                     });
-                    // getData();
-                    getSpotify();
-                    // print(loadedList.length);
+                    getSpotify(trackId: '4l8xoLKkJXhqqfbWdXcs93');
+                    print(dbMusicList.length);
                   },
                   child: CircleAvatar(
                     backgroundColor: Colors.transparent.withOpacity(0.7),
@@ -95,9 +138,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           isPlaying && loadedList.isNotEmpty
               ? MiniPlayer(
-                  songName: data.musicName,
-                  artistName: data.artistName,
-                  imgUrl: data.imgUrl,
+                  songName: musicData.musicName,
+                  artistName: musicData.artistName,
+                  imgUrl: musicData.imgUrl,
+                  audioUrl: musicData.audioUrl,
                   progress: 0.5)
               : const SizedBox(),
         ],

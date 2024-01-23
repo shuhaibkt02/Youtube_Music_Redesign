@@ -1,23 +1,33 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
 
-class MiniPlayer extends StatelessWidget {
+class MiniPlayer extends StatefulWidget {
   final String songName;
   final String artistName;
   final double progress;
   final String imgUrl;
+  final String audioUrl;
   const MiniPlayer({
     super.key,
     required this.songName,
     required this.artistName,
     required this.progress,
     required this.imgUrl,
+    required this.audioUrl,
   });
 
+  @override
+  State<MiniPlayer> createState() => _MiniPlayerState();
+}
+
+class _MiniPlayerState extends State<MiniPlayer> {
+  bool isPlaying = false;
   @override
   Widget build(BuildContext context) {
     final textTheme = CustomTextTheme(context).themeData;
     final width = CustomSize(context).width;
+    final player = AudioPlayer();
 
     return Align(
       alignment: Alignment.bottomCenter,
@@ -39,7 +49,7 @@ class MiniPlayer extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(14),
                       image: DecorationImage(
-                        image: NetworkImage(imgUrl),
+                        image: NetworkImage(widget.imgUrl),
                       ),
                     ),
                     height: 50,
@@ -51,14 +61,14 @@ class MiniPlayer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        songName,
+                        widget.songName,
                         style: textTheme.bodySmall,
                       ),
                       Flexible(
                         child: Text(
-                          (artistName.length > 20)
-                              ? artistName.split(' (Ft')[0].toString()
-                              : artistName,
+                          (widget.artistName.length > 20)
+                              ? widget.artistName.split(' (Ft')[0].toString()
+                              : widget.artistName,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           style: textTheme.bodySmall?.copyWith(fontSize: 9.5),
@@ -69,7 +79,7 @@ class MiniPlayer extends StatelessWidget {
                         width: width / 3,
                         height: 2,
                         child: LinearProgressIndicator(
-                          value: progress,
+                          value: widget.progress,
                           color: Colors.red.shade900,
                           backgroundColor: Colors.grey.shade600,
                         ),
@@ -80,15 +90,25 @@ class MiniPlayer extends StatelessWidget {
               ),
               Expanded(
                 child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.pause,
+                    onPressed: () async {
+                      await player.play(UrlSource(widget.audioUrl));
+                      setState(() {
+                        isPlaying != isPlaying;
+                      });
+                      final progress = await player.getCurrentPosition();
+                      print(progress?.inSeconds);
+                    },
+                    icon: Icon(
+                      isPlaying ? Icons.pause : Icons.play_arrow,
                       color: Colors.white,
                     )),
               ),
               Expanded(
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      print('stop');
+                      await player.stop();
+                    },
                     icon: const Icon(
                       Icons.skip_next,
                       color: Colors.white,
