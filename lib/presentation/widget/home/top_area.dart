@@ -20,15 +20,15 @@ class TopArea extends StatelessWidget {
     return Stack(
       children: [
         Image.asset(
-          'assets/images/weekend.png',
+          'assets/images/bgm.png',
           colorBlendMode: BlendMode.hue,
           fit: BoxFit.fill,
         ),
         BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.9),
+          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 0.9),
           child: Column(
             children: [
-              SizedBox(height: height / 5.5),
+              SizedBox(height: height / 6),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
@@ -74,7 +74,7 @@ class _MixListView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: SizedBox(
-        height: width / 2,
+        height: width / 1.8,
         child: ListView.separated(
           clipBehavior: Clip.none,
           scrollDirection: Axis.horizontal,
@@ -84,7 +84,7 @@ class _MixListView extends StatelessWidget {
             final _mix = _mixList[index];
             return Container(
               margin: const EdgeInsets.only(left: 5, bottom: 5),
-              width: width / 2.8,
+              width: width / 2.3,
               decoration: BoxDecoration(
                 color: index.isEven ? appColorRed : appColorGrey,
                 image: DecorationImage(
@@ -103,7 +103,7 @@ class _MixListView extends StatelessWidget {
                       _mix.subTitle,
                       style: textTheme.bodySmall?.copyWith(
                         fontSize: 10,
-                        color: Colors.white38,
+                        color: Colors.white54,
                       ),
                     ),
                     const SizedBox(height: 5),
@@ -117,6 +117,7 @@ class _MixListView extends StatelessWidget {
                       child: InkWell(
                         onTap: () {},
                         child: CircleAvatar(
+                          backgroundColor: Colors.white,
                           radius: width / 20,
                           child: const Icon(Icons.play_arrow),
                         ),

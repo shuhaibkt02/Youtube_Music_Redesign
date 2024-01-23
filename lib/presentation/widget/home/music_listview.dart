@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_music_redesign/presentation/screen/home_screen.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/top_area.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
 
@@ -17,7 +18,7 @@ class MusicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: width / 1.9,
+      height: width / 1.7,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,11 +35,15 @@ class MusicCard extends StatelessWidget {
               child: ListView.separated(
                 clipBehavior: Clip.none,
                 scrollDirection: Axis.horizontal,
-                itemCount: 6,
+                itemCount: loadedList.length,
                 separatorBuilder: (context, index) => const SizedBox(width: 1),
                 itemBuilder: (context, index) {
-                  // final list = _platList[index];
-                  return const PlayListCard();
+                  final list = loadedList[index];
+                  return PlayListCard(
+                    musicName: list.musicName,
+                    artistName: list.artistName,
+                    musicPoster: list.imgUrl,
+                  );
                 },
               ),
             ),
@@ -50,8 +55,14 @@ class MusicCard extends StatelessWidget {
 }
 
 class PlayListCard extends StatelessWidget {
+  final String musicName;
+  final String artistName;
+  final String musicPoster;
   const PlayListCard({
     super.key,
+    required this.musicName,
+    required this.artistName,
+    required this.musicPoster,
   });
 
   @override
@@ -61,49 +72,35 @@ class PlayListCard extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(left: 3, bottom: 5),
-      width: width / 2.9,
+      width: width / 2.5,
       decoration: BoxDecoration(
-        image: const DecorationImage(
-          image: AssetImage('assets/images/bgm.png'),
+        image: DecorationImage(
+          image: NetworkImage(musicPoster),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0, right: 5),
-              child: InkWell(
-                onTap: () {},
-                child: const CircleAvatar(
-                  radius: 16,
-                  child: Icon(Icons.play_arrow),
-                ),
-              ),
-            ),
-          ),
           Container(
-            // margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             decoration: BoxDecoration(
-                color: const Color(0xFF272727).withOpacity(0.9),
-                borderRadius: BorderRadius.circular(14)),
-            padding: const EdgeInsets.all(4),
+                color: const Color(0xFF272727).withOpacity(0.8),
+                borderRadius: BorderRadius.circular(12)),
+            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  " music name",
+                  musicName,
                   style: textTheme.bodySmall?.copyWith(
                     fontSize: 14,
                   ),
                 ),
                 Text(
-                  " $width",
+                  artistName,
                   style: textTheme.bodySmall?.copyWith(
                     fontSize: 11,
                     color: Colors.white38,
@@ -120,7 +117,18 @@ class PlayListCard extends StatelessWidget {
 
 List<MixListModel> _platList = [
   MixListModel(
-      subTitle: 'You mix',
-      mixLabel: 'Youtube Mix',
-      imgSrc: 'assets/images/you_mix.png'),
+    subTitle: 'The Weekend',
+    mixLabel: 'Blinding Lights',
+    imgSrc: 'assets/images/weekend.png',
+  ),
+  MixListModel(
+    subTitle: 'The xx',
+    mixLabel: 'After Dark',
+    imgSrc: 'assets/images/you_mix.png',
+  ),
+  MixListModel(
+    subTitle: 'The xx',
+    mixLabel: 'After Dark',
+    imgSrc: 'assets/images/bgm.png',
+  ),
 ];

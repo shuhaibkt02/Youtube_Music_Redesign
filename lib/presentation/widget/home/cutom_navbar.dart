@@ -11,14 +11,14 @@ class CustomButtomNavigation extends StatelessWidget {
     int selectedIndex = 0;
     List<IconData> icons = [
       Icons.home_filled,
-      Icons.explore_sharp,
+      Icons.search,
       Icons.person_outlined,
     ];
     return SafeArea(
       child: Container(
         height: 60,
-        decoration: BoxDecoration(
-          color: const Color(0xFF272727).withOpacity(0.9),
+        decoration: const BoxDecoration(
+          color: Color(0xFF1E1e1e),
           // borderRadius: const BorderRadius.all(Radius.circular(24)),
         ),
         child: Row(
