@@ -16,11 +16,10 @@ class CustomButtomNavigation extends StatelessWidget {
     ];
     return SafeArea(
       child: Container(
-        height: 65,
-        margin: const EdgeInsets.all(11),
+        height: 60,
         decoration: BoxDecoration(
-          color: const Color(0xFF272727).withOpacity(0.8),
-          borderRadius: const BorderRadius.all(Radius.circular(24)),
+          color: const Color(0xFF272727).withOpacity(0.9),
+          // borderRadius: const BorderRadius.all(Radius.circular(24)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

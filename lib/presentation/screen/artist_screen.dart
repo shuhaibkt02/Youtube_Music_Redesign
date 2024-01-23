@@ -23,6 +23,7 @@ class ArtistScreen extends StatelessWidget {
   const ArtistScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     List<ArtistModel> _artistModelList = [
       ArtistModel(
         label: 'Post Malone',
