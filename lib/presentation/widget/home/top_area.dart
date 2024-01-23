@@ -20,11 +20,11 @@ class TopArea extends StatelessWidget {
 
     return Stack(
       children: [
-        Image.network(
-          imgSrc,
-          colorBlendMode: BlendMode.hue,
-          fit: BoxFit.fill,
-        ),
+        // Image.asset(
+        //   'assets/images/bgm.png',
+        //   colorBlendMode: BlendMode.hue,
+        //   fit: BoxFit.fill,
+        // ),
         BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 0.9),
           child: Column(

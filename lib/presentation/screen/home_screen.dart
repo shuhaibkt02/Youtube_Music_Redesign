@@ -97,56 +97,73 @@ class _HomeScreenState extends State<HomeScreen> {
     final textTheme = CustomTextTheme(context).themeData;
     final width = CustomSize(context).width;
     return Scaffold(
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                TopArea(
-                  textTheme: textTheme,
-                  imgSrc: backImg,
-                ),
-                MusicCard(
-                  width: width,
-                  textTheme: textTheme,
-                  title: 'New release',
-                ),
-              ],
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  TopArea(
+                    textTheme: textTheme,
+                    imgSrc: backImg,
+                  ),
+                  MusicCard(
+                    width: width,
+                    textTheme: textTheme,
+                    title: 'New release',
+                  ),
+                  MusicCard(
+                    width: width,
+                    textTheme: textTheme,
+                    title: 'New release',
+                  ),
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            right: 10,
-            top: width / 28,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                  onTap: () async {
-                    setState(() {
-                      isPlaying = false;
-                    });
-                    getSpotify(trackId: '4l8xoLKkJXhqqfbWdXcs93');
-                    print(dbMusicList.length);
-                  },
-                  child: CircleAvatar(
-                    backgroundColor: Colors.transparent.withOpacity(0.7),
-                    child: const Icon(
+            Positioned(
+              right: 10,
+              top: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: InkWell(
+                    onTap: () async {
+                      setState(() {
+                        isPlaying = false;
+                      });
+                      getSpotify(trackId: '4l8xoLKkJXhqqfbWdXcs93');
+                      print(dbMusicList.length);
+                    },
+                    child:
+                        // CircleAvatar(
+                        //   backgroundColor: Colors.transparent.withOpacity(0.7),
+                        //   child:
+                        const Icon(
                       Icons.settings,
                       color: Colors.white,
-                    ),
-                  )),
+                      // ),
+                    )),
+              ),
             ),
-          ),
-          isPlaying && loadedList.isNotEmpty
-              ? MiniPlayer(
-                  songName: musicData.musicName,
-                  artistName: musicData.artistName,
-                  imgUrl: musicData.imgUrl,
-                  audioUrl: musicData.audioUrl,
-                  progress: 0.5)
-              : const SizedBox(),
-        ],
+            const Align(
+              alignment: Alignment.bottomCenter,
+              child: CustomButtomNavigation(),
+            ),
+            if (isPlaying && loadedList.isNotEmpty)
+              Align(
+                alignment: const Alignment(0, 0.79),
+                child: MiniPlayer(
+                    songName: musicData.musicName,
+                    artistName: musicData.artistName,
+                    imgUrl: musicData.imgUrl,
+                    audioUrl: musicData.audioUrl,
+                    progress: 0.5),
+              )
+            else
+              const SizedBox(),
+          ],
+        ),
       ),
-      bottomNavigationBar: const CustomButtomNavigation(),
+      // bottomNavigationBar: const CustomButtomNavigation(),
     );
   }
 }
