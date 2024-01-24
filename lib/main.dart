@@ -8,7 +8,7 @@ import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SqliteService().initDB();
+  // await SqliteService().initDB();
   runApp(const MyApp());
 }
 

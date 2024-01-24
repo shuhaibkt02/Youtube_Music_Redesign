@@ -34,16 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> initializeData() async {
     await getSpotify(trackId: '4VnDmjYCZkyeqeb0NIKqdA');
-    await initializeDatabase();
     _refreshNotes();
     setState(() {
       isPlaying = true;
     });
   }
 
-  Future<void> initializeDatabase() async {
-    await SqliteService().initDB();
-  }
+
 
   void _refreshNotes() async {
     final data = await SqliteService().getMusic();
