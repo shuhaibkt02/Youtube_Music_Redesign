@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
 
 class TitleAndSkip extends StatelessWidget {
@@ -19,7 +20,9 @@ class TitleAndSkip extends StatelessWidget {
             children: [
               Text('Select genres', style: textTheme.bodyMedium),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  GoRouter.of(context).pushReplacementNamed('homePage');
+                },
                 child: Text(
                   'Skip',
                   style: textTheme.bodySmall?.copyWith(

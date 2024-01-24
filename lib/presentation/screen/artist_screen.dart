@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:youtube_music_redesign/presentation/logic/genre%20artist/genre_artist_bloc.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/grid_card.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/title_skip.dart';
@@ -137,7 +138,9 @@ class ArtistScreen extends StatelessWidget {
               ),
             ),
             CustomButton(
-              onpress: () {},
+              onpress: () {
+                GoRouter.of(context).pushReplacementNamed('homePage');
+              },
               height: 60,
               backgroundColor: appColorRed,
               buttonLabel: 'Start listening',

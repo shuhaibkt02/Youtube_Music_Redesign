@@ -8,7 +8,7 @@ import 'package:youtube_music_redesign/presentation/screen/on_boarding_page.dart
 
 class AppRouterConfig {
   static GoRouter goRouter = GoRouter(
-    initialLocation: '/homePage',
+    initialLocation: '/OnBoarding',
     routes: [
       GoRoute(
         path: '/OnBoarding',

@@ -89,7 +89,7 @@ class _MusicScreenState extends State<MusicScreen> {
                 forwordButton: () {},
                 loopButton: () {},
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 35),
               FooterActions(
                 openQueue: () {
                   showModalBottomSheet(
