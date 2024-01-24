@@ -13,7 +13,7 @@ class SqliteService {
       join(path, databaseName),
       onCreate: (db, version) async {
         await db.execute(
-          "CREATE TABLE $tableName(id INTEGER PRIMARY KEY AUTOINCREMENT, musicName TEXT NOT NULL, releaseDate TEXT NOT NULL, artistName TEXT NOT NULL, imgUrl TEXT NOT NULL, audioUrl TEXT NOT NULL)",
+          "CREATE TABLE $tableName(id INTEGER PRIMARY KEY AUTOINCREMENT, musicName TEXT NOT NULL,  artistName TEXT NOT NULL,releaseDate TEXT NOT NULL, imgUrl TEXT NOT NULL, audioUrl TEXT NOT NULL)",
         );
       },
       version: 1,

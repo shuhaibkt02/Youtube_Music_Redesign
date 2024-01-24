@@ -1,16 +1,18 @@
 class SongModel {
   final int id;
   final String musicName;
-  final String releaseDate;
   final String artistName;
+  final String releaseDate;
+  final Duration totalDuration;
   final String imgUrl;
   final String audioUrl;
 
   SongModel({
     required this.id,
     required this.musicName,
-    required this.releaseDate,
     required this.artistName,
+    required this.releaseDate,
+    required this.totalDuration,
     required this.imgUrl,
     required this.audioUrl,
   });
@@ -22,6 +24,7 @@ class SongModel {
         imgUrl: json['header_image_url'] ?? 'assets/images/bgm.png',
         audioUrl: json['apple_music_player_url'] ?? '',
         id: json['annotation_count'] ?? 0,
+        totalDuration: const Duration(seconds: 30),
       );
 
   Map<String, dynamic> toMap() {

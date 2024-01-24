@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:youtube_music_redesign/presentation/screen/home_screen.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/top_area.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
@@ -39,10 +41,16 @@ class MusicCard extends StatelessWidget {
                 separatorBuilder: (context, index) => const SizedBox(width: 1),
                 itemBuilder: (context, index) {
                   final list = loadedList[index];
-                  return PlayListCard(
-                    musicName: list.musicName,
-                    artistName: list.artistName,
-                    musicPoster: list.imgUrl,
+                  return InkWell(
+                    onTap: () {
+                      GoRouter.of(context)
+                          .pushNamed('musicPage', extra: {'music': list});
+                    },
+                    child: PlayListCard(
+                      musicName: list.musicName,
+                      artistName: list.artistName,
+                      musicPoster: list.imgUrl,
+                    ),
                   );
                 },
               ),
@@ -69,13 +77,16 @@ class PlayListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = CustomTextTheme(context).themeData;
     final width = CustomSize(context).width;
+    bool isAsset = musicPoster.contains('asset');
 
     return Container(
       margin: const EdgeInsets.only(left: 3, bottom: 5),
       width: width / 2.5,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(musicPoster),
+          image: isAsset
+              ? AssetImage(musicPoster)
+              : CachedNetworkImageProvider(musicPoster) as ImageProvider,
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(24),

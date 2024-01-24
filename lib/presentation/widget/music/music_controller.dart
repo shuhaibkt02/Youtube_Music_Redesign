@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:youtube_music_redesign/presentation/widget/music/custom_icon.dart';
 
 class MusicController extends StatelessWidget {
+  final bool isPlaying;
   final VoidCallback isShuffle;
   final VoidCallback backButton;
   final VoidCallback playButton;
+  final VoidCallback pauseButton;
   final VoidCallback forwordButton;
   final VoidCallback loopButton;
   const MusicController({
@@ -15,6 +17,8 @@ class MusicController extends StatelessWidget {
     required this.playButton,
     required this.forwordButton,
     required this.loopButton,
+    required this.pauseButton,
+    required this.isPlaying,
   });
 
   @override
@@ -28,7 +32,7 @@ class MusicController extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: CustomIconButton(
               onTap: isShuffle,
-              icon: CupertinoIcons.repeat,
+              icon: CupertinoIcons.shuffle,
             ),
           ),
           CustomIconButton(
@@ -38,12 +42,12 @@ class MusicController extends StatelessWidget {
             iconSize: 30,
           ),
           InkWell(
-            onTap: playButton,
-            child: const CircleAvatar(
+            onTap: isPlaying ? pauseButton : playButton,
+            child: CircleAvatar(
               backgroundColor: Colors.white,
               radius: 25,
               child: Icon(
-                Icons.pause,
+                (isPlaying) ? Icons.pause : Icons.play_arrow,
                 color: Colors.black,
                 size: 30,
               ),

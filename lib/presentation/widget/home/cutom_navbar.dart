@@ -15,29 +15,26 @@ class CustomButtomNavigation extends StatelessWidget {
       Icons.person_outlined,
     ];
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 60,
-          decoration: BoxDecoration(
-            color: const Color(0xFF1E1e1e).withOpacity(0.95),
-            borderRadius: const BorderRadius.all(Radius.circular(14)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ...List.generate(icons.length, (index) {
-                bool isActive = selectedIndex == index;
-                return IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    icons[index],
-                    color: isActive ? appColorRed : appColorGrey,
-                  ),
-                );
-              })
-            ],
-          ),
+      child: Container(
+        height: 60,
+        decoration: BoxDecoration(
+          color: const Color(0xFF1E1e1e).withOpacity(0.95),
+          borderRadius: const BorderRadius.all(Radius.circular(14)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ...List.generate(icons.length, (index) {
+              bool isActive = selectedIndex == index;
+              return IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  icons[index],
+                  color: isActive ? appColorRed : appColorGrey,
+                ),
+              );
+            })
+          ],
         ),
       ),
     );

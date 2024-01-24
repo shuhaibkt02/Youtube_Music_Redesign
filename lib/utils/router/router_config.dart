@@ -8,7 +8,7 @@ import 'package:youtube_music_redesign/presentation/screen/on_boarding_page.dart
 
 class AppRouterConfig {
   static GoRouter goRouter = GoRouter(
-    initialLocation: '/musicPage',
+    initialLocation: '/homePage',
     routes: [
       GoRoute(
         path: '/OnBoarding',
@@ -44,12 +44,25 @@ class AppRouterConfig {
         },
       ),
       GoRoute(
-        path: '/musicPage',
-        name: 'musicPage',
-        builder: (context, state) {
-          return const MusicScreen();
-        },
-      ),
+          path: '/musicPage',
+          name: 'musicPage',
+          // builder: (context, state) {
+          //   final extraData = state.extra as Map<String, dynamic>;
+          //   return MusicScreen(
+          //     music: extraData['music'],
+          //   );
+          // },
+          pageBuilder: (context, state) {
+            final extraData = state.extra as Map<String, dynamic>;
+
+            return customTransitionPage<void>(
+              state: state,
+              child: MusicScreen(
+                music: extraData['music'],
+              ),
+              context: context,
+            );
+          }),
     ],
   );
 }

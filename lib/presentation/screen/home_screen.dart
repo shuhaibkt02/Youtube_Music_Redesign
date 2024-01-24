@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/spotify.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
-import 'package:youtube_music_redesign/data/local/data_service.dart';
 import 'package:youtube_music_redesign/data/remote/model/song_model.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/cutom_navbar.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/mini_player.dart';
@@ -22,7 +21,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late SongModel musicData;
   bool isPlaying = false;
-  List<SongModel> dbMusicList = [];
   String backImg =
       'https://i.scdn.co/image/ab67616d0000b273af634982d9b15de3c77f7dd9';
 
@@ -33,19 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> initializeData() async {
-    await getSpotify(trackId: '4VnDmjYCZkyeqeb0NIKqdA');
-    _refreshNotes();
+    await getSpotify(trackId: '7H0ya83CMmgFcOhw0UB6ow');
     setState(() {
       isPlaying = true;
-    });
-  }
-
-
-
-  void _refreshNotes() async {
-    final data = await SqliteService().getMusic();
-    setState(() {
-      dbMusicList = data;
     });
   }
 
@@ -56,9 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
     final credentials = SpotifyApiCredentials(clientId, clientSecret);
     final spotify = SpotifyApi(credentials);
     final responseData = await spotify.tracks.get(trackId);
-
     String? img = responseData.album!.images?[0].url;
+    String? previewAudio = responseData.previewUrl;
+    print(responseData.href);
 
+    // youtube audio gen
     final result = await yt.search('${responseData.name}');
     final videoId = result.first.id.value;
     final manifest = await yt.videos.streamsClient.getManifest(videoId);
@@ -70,11 +60,15 @@ class _HomeScreenState extends State<HomeScreen> {
       releaseDate: '4',
       artistName: '${responseData.artists![0].name}',
       imgUrl: '$img',
-      audioUrl: '$audioUrl',
+      // audioUrl: '$audioUrl',
+      audioUrl: (previewAudio != null) ? previewAudio : '$audioUrl',
+      // totalDuration: result.first.duration!,
+      totalDuration: (previewAudio != null)
+          ? responseData.duration!
+          : result.first.duration!,
     );
 
     checkAndAddMusic(loadedList, musicData, loadedList.add);
-    checkAndAddMusic(dbMusicList, musicData, SqliteService().addMusic);
 
     setState(() {
       backImg = img!;
@@ -109,11 +103,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     textTheme: textTheme,
                     title: 'New release',
                   ),
-                  MusicCard(
-                    width: width,
-                    textTheme: textTheme,
-                    title: 'New release',
-                  ),
                 ],
               ),
             ),
@@ -124,43 +113,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
                     onTap: () async {
-                      setState(() {
-                        isPlaying = false;
-                      });
-                      getSpotify(trackId: '4l8xoLKkJXhqqfbWdXcs93');
-                      print(dbMusicList.length);
+                      // setState(() {
+                      //   isPlaying = false;
+                      // });
+                      // getSpotify(trackId: '4l8xoLKkJXhqqfbWdXcs93');
                     },
-                    child:
-                        // CircleAvatar(
-                        //   backgroundColor: Colors.transparent.withOpacity(0.7),
-                        //   child:
-                        const Icon(
-                      Icons.settings,
-                      color: Colors.white,
-                      // ),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.transparent.withOpacity(0.7),
+                      child: const Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                      ),
                     )),
               ),
             ),
-            const Align(
-              alignment: Alignment.bottomCenter,
-              child: CustomButtomNavigation(),
-            ),
             if (isPlaying && loadedList.isNotEmpty)
-              Align(
-                alignment: const Alignment(0, 0.79),
-                child: MiniPlayer(
-                    songName: musicData.musicName,
-                    artistName: musicData.artistName,
-                    imgUrl: musicData.imgUrl,
-                    audioUrl: musicData.audioUrl,
-                    progress: 0.5),
-              )
+              MiniPlayer(
+                  songName: musicData.musicName,
+                  artistName: musicData.artistName,
+                  imgUrl: musicData.imgUrl,
+                  audioUrl: musicData.audioUrl,
+                  progress: 0.5)
             else
               const SizedBox(),
           ],
         ),
       ),
-      // bottomNavigationBar: const CustomButtomNavigation(),
+      bottomNavigationBar: const CustomButtomNavigation(),
     );
   }
 }
