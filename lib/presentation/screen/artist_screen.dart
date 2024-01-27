@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:youtube_music_redesign/logic/genre%20artist/genre_artist_bloc.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/grid_card.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/title_skip.dart';
-import 'package:youtube_music_redesign/presentation/widget/landing%20page/custom_button.dart';
+import 'package:youtube_music_redesign/presentation/widget/onboard/custom_button.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
 import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
@@ -29,22 +29,22 @@ class ArtistScreen extends StatelessWidget {
       ArtistModel(
         label: 'Post Malone',
         isActive: false,
-        imgScr: 'assets/images/weekend.png',
+        imgScr: 'assets/images/lofi.png',
       ),
       ArtistModel(
         label: 'David Guetta',
         isActive: false,
-        imgScr: 'assets/images/weekend.png',
+        imgScr: 'assets/images/bgm.png',
       ),
       ArtistModel(
         label: '2Pac',
         isActive: false,
-        imgScr: 'assets/images/weekend.png',
+        imgScr: 'assets/images/rock.png',
       ),
       ArtistModel(
         label: 'Snoop Dogg',
         isActive: false,
-        imgScr: 'assets/images/weekend.png',
+        imgScr: 'assets/images/you_mix.png',
       ),
       ArtistModel(
         label: 'The Weekend',

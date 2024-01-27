@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:youtube_music_redesign/logic/genre%20artist/genre_artist_bloc.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/grid_card.dart';
 import 'package:youtube_music_redesign/presentation/widget/genre/title_skip.dart';
-import 'package:youtube_music_redesign/presentation/widget/landing%20page/custom_button.dart';
+import 'package:youtube_music_redesign/presentation/widget/onboard/custom_button.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
 import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
@@ -72,14 +72,14 @@ class GenreScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 30, bottom: 40),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  color: const Color(0xFF1E1E1E),
+                  color: colorDarkGrey1,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       child: Container(
-                        color: const Color(0xFF1E1E1E),
+                        color:  colorDarkGrey1,
                         child: const TitleAndSkip(),
                       ),
                     ),
