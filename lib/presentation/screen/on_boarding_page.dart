@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:youtube_music_redesign/presentation/logic/borading_bloc/onlanding_bloc.dart';
-import 'package:youtube_music_redesign/presentation/widget/landing%20page/onborad_page_view.dart';
+import 'package:youtube_music_redesign/logic/borading_bloc/onlanding_bloc.dart';
+import 'package:youtube_music_redesign/presentation/widget/onboard/onborad_page_view.dart';
 
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({super.key});

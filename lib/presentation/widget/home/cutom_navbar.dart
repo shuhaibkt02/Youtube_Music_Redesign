@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:youtube_music_redesign/logic/navbar/nav_bloc.dart';
 import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
 class CustomButtomNavigation extends StatelessWidget {
@@ -25,13 +27,42 @@ class CustomButtomNavigation extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ...List.generate(icons.length, (index) {
-              bool isActive = selectedIndex == index;
-              return IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  icons[index],
-                  color: isActive ? appColorRed : appColorGrey,
-                ),
+              return BlocBuilder<NavBloc, NavState>(
+                builder: (context, state) {
+                  switch (state) {
+                    case InitNav():
+                      bool isActive = selectedIndex == index;
+                      return IconButton(
+                        onPressed: () {
+                          context
+                              .read<NavBloc>()
+                              .add(ChangeNavBarEvent(navIndex: index));
+                        },
+                        icon: Icon(
+                          icons[index],
+                          color: isActive ? appColorRed : appColorGrey,
+                        ),
+                      );
+                    case LoadedNav():
+                      int navIndex = state.navIndex;
+                      bool isActive = navIndex == index;
+                      return IconButton(
+                        onPressed: () {
+                          print('$index $navIndex');
+
+                          context
+                              .read<NavBloc>()
+                              .add(ChangeNavBarEvent(navIndex: index));
+                        },
+                        icon: Icon(
+                          icons[index],
+                          color: isActive ? appColorRed : appColorGrey,
+                        ),
+                      );
+                    case ErrorNav():
+                      return const SizedBox();
+                  }
+                },
               );
             })
           ],

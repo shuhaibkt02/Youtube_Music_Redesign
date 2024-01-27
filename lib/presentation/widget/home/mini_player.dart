@@ -102,8 +102,7 @@ class _MiniPlayerState extends State<MiniPlayer> {
                       setState(() {
                         isPlaying = false;
                       });
-                      final progress = await player.getCurrentPosition();
-                      print(progress?.inSeconds);
+                      // final progress = await player.getCurrentPosition();
                     },
                     icon: Icon(
                       isPlaying ? Icons.pause : Icons.play_arrow,
@@ -113,7 +112,6 @@ class _MiniPlayerState extends State<MiniPlayer> {
               Expanded(
                 child: IconButton(
                     onPressed: () async {
-                      print('stop');
                       await player.stop();
                     },
                     icon: const Icon(
