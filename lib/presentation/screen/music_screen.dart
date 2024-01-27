@@ -22,8 +22,8 @@ class _MusicScreenState extends State<MusicScreen> {
   final player = AudioPlayer();
   final AudioCache playerCache = AudioCache();
   bool lyricsOpen = false;
-  ScrollController _scrollController = ScrollController();
-  GlobalKey _lyricsContainerKey = GlobalKey();
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _lyricsContainerKey = GlobalKey();
   @override
   void dispose() {
     _scrollController.dispose();
@@ -114,7 +114,6 @@ class _MusicScreenState extends State<MusicScreen> {
                       final render = _lyricsContainerKey.currentContext!
                           .findRenderObject() as RenderBox;
                       final position = render.localToGlobal(Offset.zero);
-                      print(position);
 
                       _scrollController.animateTo(
                         position.dy,

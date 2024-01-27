@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
+import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
 class GridCard extends StatelessWidget {
   final bool isActive;
@@ -26,9 +27,8 @@ class GridCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(left: 3),
         decoration: BoxDecoration(
-          color: isActive
-              ? selectedColor ?? Colors.red.shade400
-              : const Color(0xFF272727),
+          color:
+              isActive ? selectedColor ?? Colors.red.shade400 : colorDarkGrey2,
           borderRadius: BorderRadius.circular(28),
         ),
         child: Column(
@@ -40,8 +40,7 @@ class GridCard extends StatelessWidget {
                   : (width > 549)
                       ? width / 14
                       : width / 11,
-              backgroundColor:
-                  isActive ? selectedCircleColor : const Color(0xFF323232),
+              backgroundColor: isActive ? selectedCircleColor : colorDarkGrey3,
               backgroundImage:
                   AssetImage(iconImg ?? 'assets/images/google.png'),
             ),

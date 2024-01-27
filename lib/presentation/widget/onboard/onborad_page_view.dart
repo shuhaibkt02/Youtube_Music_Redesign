@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:youtube_music_redesign/presentation/logic/borading_bloc/onlanding_bloc.dart';
-import 'package:youtube_music_redesign/presentation/widget/landing%20page/custom_button.dart';
-import 'package:youtube_music_redesign/presentation/widget/landing%20page/custom_dot_indicator.dart';
-import 'package:youtube_music_redesign/presentation/widget/landing%20page/container_page_view.dart';
+import 'package:youtube_music_redesign/logic/borading_bloc/onlanding_bloc.dart';
+import 'package:youtube_music_redesign/presentation/widget/onboard/custom_button.dart';
+import 'package:youtube_music_redesign/presentation/widget/onboard/custom_dot_indicator.dart';
+import 'package:youtube_music_redesign/presentation/widget/onboard/container_page_view.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
 import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
@@ -69,8 +69,7 @@ class OnboardingPageView extends StatelessWidget {
         CustomButton(
           backgroundColor: (isLastPage == true) ? appColorRed : appColorWhite,
           buttonLabel: (isLastPage == true) ? 'Get started' : 'Next',
-          labelColor:
-              (isLastPage == true) ? Colors.grey.shade300 : appColorBlack,
+          labelColor: (isLastPage == true) ? colorGrey300 : appColorBlack,
           isLast: isLastPage,
           onpress: () async {
             isLastPage
@@ -103,7 +102,7 @@ class OnboardingPageView extends StatelessWidget {
       context: context,
       builder: (context) => Container(
         decoration: const BoxDecoration(
-            color: Color(0xff1E1E1E),
+            color: colorDarkGrey1,
             borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
         height: CustomSize(context).width / 2.6,
         child: Column(
@@ -118,7 +117,7 @@ class OnboardingPageView extends StatelessWidget {
                 height: 70,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: const Color(0xff424242),
+                  color: colorLightGrey1,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Row(
@@ -127,7 +126,7 @@ class OnboardingPageView extends StatelessWidget {
                     Expanded(
                       child: CircleAvatar(
                         radius: 25,
-                        backgroundColor: const Color(0xff343434),
+                        backgroundColor: colorDarkGrey3,
                         child: Image.asset(
                           'assets/images/google.png',
                           fit: BoxFit.contain,
@@ -140,7 +139,7 @@ class OnboardingPageView extends StatelessWidget {
                         'Login with Google',
                         style: CustomTextTheme(context)
                             .bodySmall
-                            ?.copyWith(color: const Color(0xffA7A7A7)),
+                            ?.copyWith(color: colorLightGrey3),
                       ),
                     ),
                     const Padding(
@@ -148,7 +147,7 @@ class OnboardingPageView extends StatelessWidget {
                       child: Icon(
                         Icons.arrow_forward_ios,
                         size: 16,
-                        color: Color(0xff747474),
+                        color: colorLightGrey2,
                       ),
                     ),
                   ],

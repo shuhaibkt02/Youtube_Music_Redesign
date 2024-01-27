@@ -1,17 +1,5 @@
 import 'package:flutter/material.dart';
 
-ThemeData themeData = ThemeData(
-  colorScheme: ColorScheme.fromSeed(seedColor: appColorBlack),
-  scaffoldBackgroundColor: appColorBlack,
-  useMaterial3: true,
-  textTheme: TextTheme(
-    titleLarge: titleLarge,
-    bodyMedium: bodyMedium,
-    bodySmall: bodySmall,
-  ),
-  fontFamily: 'Gilroy',
-);
-
 TextStyle titleLarge = const TextStyle(
   color: appColorWhite,
   fontSize: 90,
@@ -19,6 +7,8 @@ TextStyle titleLarge = const TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'Gilroy',
 );
+
+TextStyle bodyLarge = const TextStyle();
 
 TextStyle bodyMedium = const TextStyle(
   color: appColorWhite,
@@ -30,12 +20,21 @@ TextStyle bodyMedium = const TextStyle(
 TextStyle bodySmall = const TextStyle(
   fontSize: 12,
   fontFamily: 'Gilroy',
-  color: appColorWhite,
+  color: colorGrey300,
   fontWeight: FontWeight.w500,
 );
 
-const appColorWhite = Color(0xffffffff);
-const appColorGrey = Color(0xff9f9f9f);
-const appColorDarkGey = Color(0xff272727);
 const appColorBlack = Color(0xff101010);
 const appColorRed = Color(0xffCA2828);
+
+const appColorWhite = Color(0xffffffff);
+const appColorGrey = Color(0xff9f9f9f);
+const colorDarkGrey1 = Color(0xff1E1E1E);
+const colorDarkGrey2 = Color(0xff272727);
+const colorDarkGrey3 = Color(0xff343434);
+
+const colorLightGrey1 = Color(0xff424242);
+const colorLightGrey2 = Color(0xff747474);
+
+const colorLightGrey3 = Color(0xffA7A7A7);
+const colorGrey300 = Color.fromRGBO(224, 224, 224, 1);
