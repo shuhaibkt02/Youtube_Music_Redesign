@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:spotify/spotify.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:youtube_music_redesign/data/remote/model/song_model.dart';
-import 'package:youtube_music_redesign/presentation/widget/home/cutom_navbar.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/mini_player.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/music_listview.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/top_area.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
-import 'secret.dart';
+// import 'secret.dart';
 
 List<SongModel> loadedList = [];
 
@@ -31,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> initializeData() async {
-    await getSpotify(trackId: '7H0ya83CMmgFcOhw0UB6ow');
+    // await getSpotify(trackId: '7H0ya83CMmgFcOhw0UB6ow');
     setState(() {
       isPlaying = true;
     });
@@ -39,8 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   getSpotify({required String trackId}) async {
     final yt = YoutubeExplode();
-    const clientId = SercetClassHere.clientId;
-    const clientSecret = SercetClassHere.clientSerc;
+    const clientId = 'SercetClassHere.clientId';
+    const clientSecret = 'SercetClassHere.clientSerc';
     final credentials = SpotifyApiCredentials(clientId, clientSecret);
     final spotify = SpotifyApi(credentials);
     final responseData = await spotify.tracks.get(trackId);
@@ -139,7 +138,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const CustomButtomNavigation(),
     );
   }
 }

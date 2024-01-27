@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:youtube_music_redesign/presentation/screen/artist_screen.dart';
 import 'package:youtube_music_redesign/presentation/screen/genre_screen.dart';
-import 'package:youtube_music_redesign/presentation/screen/home_screen.dart';
+import 'package:youtube_music_redesign/presentation/screen/main_screen.dart';
 import 'package:youtube_music_redesign/presentation/screen/music_screen.dart';
 import 'package:youtube_music_redesign/presentation/screen/on_boarding_page.dart';
 
 class AppRouterConfig {
   static GoRouter goRouter = GoRouter(
-    initialLocation: '/OnBoarding',
+    initialLocation: '/homePage',
     routes: [
       GoRoute(
         path: '/OnBoarding',
@@ -40,7 +40,7 @@ class AppRouterConfig {
         path: '/homePage',
         name: 'homePage',
         builder: (context, state) {
-          return const HomeScreen();
+          return const MainScreen();
         },
       ),
       GoRoute(

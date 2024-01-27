@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:youtube_music_redesign/presentation/logic/borading_bloc/onlanding_bloc.dart';
+import 'package:youtube_music_redesign/logic/borading_bloc/onlanding_bloc.dart';
 import 'package:youtube_music_redesign/presentation/widget/landing%20page/custom_button.dart';
 import 'package:youtube_music_redesign/presentation/widget/landing%20page/custom_dot_indicator.dart';
 import 'package:youtube_music_redesign/presentation/widget/landing%20page/container_page_view.dart';
