@@ -19,6 +19,7 @@ class MusicCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var loadedList;
     return SizedBox(
       height: width / 1.7,
       child: Column(

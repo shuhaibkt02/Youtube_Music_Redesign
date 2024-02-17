@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:youtube_music_redesign/logic/borading_bloc/onlanding_bloc.dart';
-<<<<<<< HEAD:lib/presentation/widget/landing page/onborad_page_view.dart
-import 'package:youtube_music_redesign/presentation/widget/landing%20page/custom_button.dart';
-import 'package:youtube_music_redesign/presentation/widget/landing%20page/custom_dot_indicator.dart';
-import 'package:youtube_music_redesign/presentation/widget/landing%20page/container_page_view.dart';
-=======
 import 'package:youtube_music_redesign/presentation/widget/onboard/custom_button.dart';
 import 'package:youtube_music_redesign/presentation/widget/onboard/custom_dot_indicator.dart';
 import 'package:youtube_music_redesign/presentation/widget/onboard/container_page_view.dart';
->>>>>>> ba4b119b8c2257710b15d28fbb0613b2a7d2aaf8:lib/presentation/widget/onboard/onborad_page_view.dart
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
 import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
