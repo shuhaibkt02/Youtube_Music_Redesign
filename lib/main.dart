@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:youtube_music_redesign/presentation/logic/borading_bloc/onlanding_bloc.dart';
-import 'package:youtube_music_redesign/presentation/logic/genre%20artist/genre_artist_bloc.dart';
+import 'package:youtube_music_redesign/logic/borading_bloc/onlanding_bloc.dart';
+import 'package:youtube_music_redesign/logic/genre%20artist/genre_artist_bloc.dart';
 import 'package:youtube_music_redesign/utils/router/router_config.dart';
 import 'package:youtube_music_redesign/utils/theme/app_text_theme.dart';
 
@@ -22,7 +22,17 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Youtube Music',
         debugShowCheckedModeBanner: false,
-        theme: themeData,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: appColorBlack),
+          scaffoldBackgroundColor: appColorBlack,
+          useMaterial3: true,
+          textTheme: TextTheme(
+            titleLarge: titleLarge,
+            bodyMedium: bodyMedium,
+            bodySmall: bodySmall,
+          ),
+          fontFamily: 'Gilroy',
+        ),
         routerConfig: AppRouterConfig.goRouter,
       ),
     );
