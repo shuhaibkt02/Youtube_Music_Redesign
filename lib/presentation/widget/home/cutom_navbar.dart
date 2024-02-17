@@ -20,7 +20,6 @@ class CustomButtomNavigation extends StatelessWidget {
         height: 60,
         decoration: BoxDecoration(
           color: const Color(0xFF1E1e1e).withOpacity(0.95),
-          borderRadius: const BorderRadius.all(Radius.circular(14)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -32,17 +31,15 @@ class CustomButtomNavigation extends StatelessWidget {
                     case LoadedNav():
                       int navIndex = state.navIndex;
                       bool isActive = navIndex == index;
-                      return IconButton(
-                        onPressed: () {
-                          print('$index $navIndex');
-
-                          context
-                              .read<NavBloc>()
-                              .add(ChangeNavBarEvent(navIndex: index));
-                        },
-                        icon: Icon(
-                          icons[index],
-                          color: isActive ? appColorRed : appColorGrey,
+                      return Expanded(
+                        child: _CutomNavButton(
+                          icons: icons[index],
+                          isActive: isActive,
+                          onPress: () {
+                            context
+                                .read<NavBloc>()
+                                .add(ChangeNavBarEvent(navIndex: index));
+                          },
                         ),
                       );
                   }
@@ -50,6 +47,32 @@ class CustomButtomNavigation extends StatelessWidget {
               );
             })
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CutomNavButton extends StatelessWidget {
+  const _CutomNavButton({
+    required this.icons,
+    required this.isActive,
+    required this.onPress,
+  });
+
+  final IconData icons;
+  final bool isActive;
+  final VoidCallback onPress;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onPress,
+      child: SizedBox(
+        height: 50,
+        child: Icon(
+          icons,
+          color: isActive ? appColorRed : appColorGrey,
         ),
       ),
     );
