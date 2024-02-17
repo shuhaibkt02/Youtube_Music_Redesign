@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:youtube_music_redesign/presentation/screen/home_screen.dart';
+import 'package:youtube_music_redesign/presentation/widget/home/top_area.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
 
 class MusicCard extends StatelessWidget {

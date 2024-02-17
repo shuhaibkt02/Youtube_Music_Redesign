@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:spotify/spotify.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:youtube_music_redesign/data/remote/model/song_model.dart';
-// import 'package:youtube_music_redesign/presentation/widget/home/mini_player.dart';
+import 'package:youtube_music_redesign/presentation/widget/home/cutom_navbar.dart';
+import 'package:youtube_music_redesign/presentation/widget/home/mini_player.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/music_listview.dart';
 import 'package:youtube_music_redesign/presentation/widget/home/top_area.dart';
 import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
@@ -82,6 +84,13 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+=======
+import 'package:youtube_music_redesign/presentation/widget/home/music_listview.dart';
+import 'package:youtube_music_redesign/presentation/widget/home/top_area.dart';
+import 'package:youtube_music_redesign/utils/extension/custom_size.dart';
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+>>>>>>> ba4b119b8c2257710b15d28fbb0613b2a7d2aaf8
   @override
   Widget build(BuildContext context) {
     // bool isPlaying = false;
