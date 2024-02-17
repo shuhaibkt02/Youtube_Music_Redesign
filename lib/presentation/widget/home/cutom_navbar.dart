@@ -10,7 +10,6 @@ class CustomButtomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0;
     List<IconData> icons = [
       Icons.home_filled,
       Icons.search,
@@ -27,22 +26,9 @@ class CustomButtomNavigation extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ...List.generate(icons.length, (index) {
-              return BlocBuilder<NavBloc, NavState>(
+              return BlocBuilder<NavBloc, LoadedNav>(
                 builder: (context, state) {
                   switch (state) {
-                    case InitNav():
-                      bool isActive = selectedIndex == index;
-                      return IconButton(
-                        onPressed: () {
-                          context
-                              .read<NavBloc>()
-                              .add(ChangeNavBarEvent(navIndex: index));
-                        },
-                        icon: Icon(
-                          icons[index],
-                          color: isActive ? appColorRed : appColorGrey,
-                        ),
-                      );
                     case LoadedNav():
                       int navIndex = state.navIndex;
                       bool isActive = navIndex == index;
@@ -59,8 +45,6 @@ class CustomButtomNavigation extends StatelessWidget {
                           color: isActive ? appColorRed : appColorGrey,
                         ),
                       );
-                    case ErrorNav():
-                      return const SizedBox();
                   }
                 },
               );

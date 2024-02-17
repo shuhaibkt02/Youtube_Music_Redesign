@@ -1,19 +1,22 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 part 'nav_event.dart';
 part 'nav_state.dart';
 
-class NavBloc extends Bloc<NavEvent, NavState> {
+class NavBloc extends Bloc<NavEvent, LoadedNav> {
   int selectNavIndex = 0;
 
-  NavBloc() : super(InitNav()) {
+  NavBloc() : super(const LoadedNav(navIndex: 0)) {
     on<ChangeNavBarEvent>((event, emit) {
       try {
         selectNavIndex = event.navIndex;
         emit(LoadedNav(navIndex: selectNavIndex));
       } catch (e) {
-        emit(ErrorNav(errorMessage: '$e'));
+        if (kDebugMode) {
+          print('$e');
+        }
       }
     });
   }
