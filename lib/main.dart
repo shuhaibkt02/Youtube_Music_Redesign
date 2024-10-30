@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
             bodySmall: bodySmall,
           ),
           fontFamily: 'Gilroy',
+          
         ),
         routerConfig: AppRouterConfig.goRouter,
       ),
